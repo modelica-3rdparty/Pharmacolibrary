@@ -7,18 +7,20 @@ model Patient_PKPG_1C_Gentamicin
   parameter String SLC22A2_2 = "*1";
   parameter String CYP2C19_1 = "*1";
   parameter String CYP2C19_2 = "*1";
+  parameter Pharmacolibrary.Types.Clearance CL=1.6666666666666667e-6 "clearance";
+  parameter Pharmacolibrary.Types.Volume Vd= 0.0175 "volume of distribution";
   Pharmacolibrary.Sources.PeriodicDose dose(firstAdminTime(displayUnit = "s") = 60, adminMass = 4e-4, adminDuration(displayUnit = "s") = 60, F = 1, adminPeriod = 28800, doseCount = 3)  annotation(
     Placement(transformation(origin = {-12, 22}, extent = {{-10, -10}, {10, 10}})));
-  Pharmacolibrary.Pharmacokinetic.NoPerfusedTissueCompartment central(V = 0.0175)  annotation(
+  Pharmacolibrary.Pharmacokinetic.NoPerfusedTissueCompartment central(V = Vd)  annotation(
     Placement(transformation(origin = {-12, -8}, extent = {{-10, -10}, {10, 10}})));
-  Pharmacolibrary.Pharmacokinetic.ClearanceDrivenElimination elim(CL = 1.6666666666666667e-6,useClInput = true)  annotation(
+  Pharmacolibrary.Pharmacokinetic.ClearanceDrivenElimination elim(useClInput = true)  annotation(
     Placement(transformation(origin = {18, -8}, extent = {{-10, -10}, {10, 10}})));
 
 //extends Pharmacolibrary.Examples.PKOneCompartmentModel(singleDose(firstAdminTime = 1, adminMass = 4e-4, adminDuration = 60, F = 1), central(V = 0.0175, fu), elim(CL = 1.6666666666666667e-6, useClInput = true));
   parameter Pharmacolibrary.Types.MassConcentration MIC = 0.002 "Minimal inhibitory concentration";
   parameter Pharmacolibrary.Types.MassConcentration C_tox_peak = 0.025 "Peak toxicity concentration";
   parameter Pharmacolibrary.Types.MassConcentration C_tox_valley = 0.0021 "Peak toxicity concentration";
-  Pharmacolibrary.Sources.ClearanceConst elimClearance(Cl = 1.6666666666666667e-6)  annotation(
+  Pharmacolibrary.Sources.ClearanceConst elimClearance(Cl = CL)  annotation(
     Placement(transformation(origin = {-2, -68}, extent = {{-10, -10}, {10, 10}})));
   Pharmacolibrary.Pharmacogenomics.Modifiers.ClearanceModifierComponent clearanceModifierComponent annotation(
     Placement(transformation(origin = {20, -52}, extent = {{-10, -10}, {10, 10}})));

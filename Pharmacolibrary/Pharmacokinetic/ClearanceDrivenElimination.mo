@@ -1,7 +1,7 @@
 within Pharmacolibrary.Pharmacokinetic;
 model ClearanceDrivenElimination
   extends Pharmacolibrary.Interfaces.InterfaceElimination;
-  parameter Pharmacolibrary.Types.VolumeFlowRate CL( displayUnit="l/min") "clearence";
+  parameter Pharmacolibrary.Types.VolumeFlowRate CL( displayUnit="l/min")=0 "clearence";
   Pharmacolibrary.Types.MassConcentration C "free concentration of either blood/plasma or tissue at the connector";
   Pharmacolibrary.Types.Mass MExc(start = 0, fixed = true) "excreted drug mass";
   parameter Boolean useClInput = false "true → take clearance from external signal";
